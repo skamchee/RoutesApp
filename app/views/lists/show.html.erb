@@ -12,7 +12,10 @@
   	<div class="col-md-6">
 
   	<table class="table">
-  		
+  		<tr><td>
+	  		<h2><%= @list.name %></h2>
+	  		<h6><%= @list.description %></h6>
+	  	</td></tr>
 <!--Print out list of locations-->
 	<% if !@locations.blank? %>
 		<% @locations.each do |location| %>
@@ -29,7 +32,9 @@
 		</td></tr>
 		<% end %>
 	<% else %>
-		<h2>No locations added yet!</h2>
+		<tr><td>
+		<h3>No locations added yet!</h3>
+	</td></tr>
 	<% end %>
 		
 	</table>

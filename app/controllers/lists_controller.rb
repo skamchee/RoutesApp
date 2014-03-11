@@ -19,6 +19,7 @@ class ListsController < ApplicationController
 
 	#show the locations at that list
 	def show
+		@list = List.find_by(id: params[:id])
 		@locations = Location.where(list_id: params[:id])
 		session[:list_id]= params[:id]
 
@@ -38,7 +39,7 @@ class ListsController < ApplicationController
 		l.description = params[:description]
 		l.user_id = session[:user_id]
 		l.save
-		redirect_to lists_url
+		redirect_to list_path(l.id)
 	end
 
 	def edit
