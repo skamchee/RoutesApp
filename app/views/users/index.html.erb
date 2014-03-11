@@ -1,0 +1,13 @@
+<!-- shows all the lists a user has -->
+	<table class="table">
+		<tr><td>
+	  		<h2><%= "Our 20 newest users" %></h2>
+	  	</td></tr>
+		<% @users.each do |user| %>
+			<tr><td>
+				<p><%= link_to user.name, user_url(user.name) %></p>
+			</td></tr>
+		<% end %>
+	
+	</table>
+
