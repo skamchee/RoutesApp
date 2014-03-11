@@ -1,0 +1,20 @@
+<!-- shows all the lists a user has -->
+<!--no need for user authorization here, as user can not access other lists through a url -->
+
+<%= link_to "Add a list", "/lists/new" %>
+<% if @lists %>
+	<table class="table">
+	
+		<% @lists.each do |list| %>
+			<tr><td>
+				<h2><%= link_to list.name, "/lists/#{list.id}"%></h2>
+				<p><%=list.description%></p>
+					<%= link_to "Delete", "/lists/#{list.id}", method: 'delete' %>
+					<%= link_to "Edit", edit_list_path(list.id) %>
+			</td></tr>
+		<% end %>
+	
+	</table>
+<% else %>
+	<h2>No lists yet!</h2>
+<% end %>

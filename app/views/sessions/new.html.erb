@@ -1,0 +1,16 @@
+<h1>Sign In</h1>
+
+<% if params[:error_msg] %>
+<%= params[:error_msg] %>
+<% end %>
+<br>
+<%= form_tag "/sessions" do %>
+  <%= label_tag :email %>
+  <%= text_field_tag :email, "", placeholder: "Enter your email address" %>
+  <br>
+  <%= label_tag :password %>
+  <%= password_field_tag :password  %>
+  <br>
+
+  <%= submit_tag "Login" %>
+<% end %>

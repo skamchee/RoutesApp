@@ -1,0 +1,18 @@
+<h1>Edit List</h1>
+
+<!--Send a PATCH request to the Users resource-->
+<%= form_tag "/lists/#{@list.id}", :method => 'patch' do %>
+
+  <% if params[:error_msg] %>
+  <%= params[:error_msg] %>
+  <% end %>
+<br>
+  <%= label_tag :name %>
+  <%= text_field_tag :name, @list.name %>
+  <br>
+  <%= label_tag :description %>
+  <%= text_field_tag :description, @list.description %>
+  <br>
+  <%= submit_tag "Submit" %>
+
+<% end %>

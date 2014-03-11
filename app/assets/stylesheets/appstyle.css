@@ -1,0 +1,55 @@
+body { padding-top: 50px; } /*pad body to provide room for fixed navbar*/
+#mapcanvas {
+  position: fixed !important;
+  width:500px;
+  height:400px;
+} /*fix the map so that it scrolls with the list of locations*/
+
+#listoptions {
+  position: fixed !important;
+  width:500px;
+  height:50px;
+
+} /*fix the map so that it scrolls with the list of locations*/
+
+#directionLeg {
+  position: fixed !important;
+  width:500px;
+  height:100px;
+  display:none;
+} /*fix the map so that it scrolls with the list of locations*/
+
+.navbar-nav > li > a {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  line-height: 20px;
+}
+
+.navbar-nav > li > h2{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  line-height: 20px;
+}
+
+.navbar-brand {
+  float: left;
+  height: 30px;
+  padding: 5px 20px;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.navbar {
+  min-height: 30px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .navbar-left {
+    float: left !important;
+  }
+  .navbar-right {
+    float: right !important;
+    padding-right: 40px;
+  }
+}

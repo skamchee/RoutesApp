@@ -1,0 +1,37 @@
+<h1>Edit a location</h1>
+
+<% if session[:errors] %>
+  <% session[:errors].each do |e| %>
+    <h6>Errors:<%= e %></h6>
+  <% end %>
+  <% session[:errors] = nil %><!--clear for future use -->
+<% end %>
+<br>
+
+<!--Send a PATCH request to the Locations resource-->
+<%= form_tag "/locations/#{@location.id}", :method => 'patch' do %>
+
+
+  <%= label_tag :name %>
+  <%= text_field_tag :name, @location.name, size: 100 %>
+  <br>
+  <%= label_tag :address %>
+  <%= text_field_tag "autocomplete", @location.address, size: 100 %>
+  <br>
+  <%= label_tag :description %>
+  <%= text_area_tag "description", @location.description, rows:4, cols:100 %>
+
+<%= hidden_field_tag 'lat' %>
+<%= hidden_field_tag 'lng' %>
+<%= hidden_field_tag 'list_id', @location.list_id %>
+<!-- need to present some options -->
+<!-- then let the post request come from only those options -->
+  <br>
+  <br>
+  <%= submit_tag "Submit" %>
+<% end %>
+
+<!--this code must be after the input element with id="autocomplete", or it will not be set with the google autocomplete code-->
+<%= javascript_tag do %>
+  initac();
+<% end %>

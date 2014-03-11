@@ -1,0 +1,28 @@
+<h1>Sign Up!</h1>
+
+<% if session[:errors] %>
+  <% session[:errors].each do |e| %>
+    <h6>Errors:<%= e %></h6>
+  <% end %>
+    <% session[:errors] = nil %><!--clear for future use -->
+<% end %>
+<br>
+
+<!--Send a POST request to the Users resource-->
+<%= form_tag "/users" do %>
+
+  <%= label_tag :name %>
+  <%= text_field_tag :name %>
+  <br>
+  <%= label_tag :email %>
+  <%= text_field_tag :email %>
+  <br>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+  <br>
+  <%= label_tag :password_confirmation %>
+  <%= password_field_tag :password_confirmation %>
+  <br>
+  <%= submit_tag "Submit" %>
+
+<% end %>

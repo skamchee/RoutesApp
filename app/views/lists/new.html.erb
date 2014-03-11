@@ -1,0 +1,18 @@
+<h1>New List</h1>
+
+<!--Send a POST request to the Users resource-->
+<%= form_tag "/lists" do %>
+
+  <% if params[:error_msg] %>
+  <%= params[:error_msg] %>
+  <% end %>
+<br>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %>
+  <br>
+  <%= label_tag :description %>
+  <%= text_field_tag :description %>
+  <br>
+  <%= submit_tag "Submit" %>
+
+<% end %>

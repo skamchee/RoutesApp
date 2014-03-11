@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RoutesApp</title>
+
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places", :type => "text/javascript"%>
+
+ <%= stylesheet_link_tag "bootstrap.css" %>
+
+ <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+  <ul class="nav navbar-nav navbar-left">
+  <li><%= link_to "Routes", root_url, class: "navbar-brand" %></li>
+
+  <% if !session[:user_id].blank? %>
+  <li><%= link_to "Lists", lists_url%></li>
+  <% end %>
+    
+  </ul>
+
+  <ul class="nav navbar-nav navbar-right">
+    <% if session[:user_id].blank? %>
+      <li> <%= link_to "Sign up", new_user_url %></li>
+      <li><%= link_to "Sign in", new_session_url %></li>
+    <% else %>
+      <li><h5>Hello <%= User.find_by(id: session[:user_id]).name %>!</h5></li>
+      <li><%= link_to "Sign out", logout_url %></li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="container">
+  <%= yield %>
+</div>
+
+</body>
+</html>

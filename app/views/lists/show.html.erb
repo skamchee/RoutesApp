@@ -1,0 +1,106 @@
+<!-- shows detail for one list -->
+
+<% alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'] %>
+
+<% if session[:user_id]==List.find_by(id: session[:list_id]).user_id %><!--user authorization-->
+	<% editable = true %>
+<% end %>
+
+<div class="row">
+
+	<% counter = 0 %>
+  	<div class="col-md-6">
+
+  	<table class="table">
+  		
+<!--Print out list of locations-->
+	<% if !@locations.blank? %>
+		<% @locations.each do |location| %>
+		<tr><td>
+			<h3><%= image_tag "/assets/marker#{alphabet[counter]}.png" %>      <%=location.name%></h3>
+			<%=location.address%>
+			<p><%=location.description%></p>
+			<h6><%=location.lat%>, <%=location.lng%></h6>
+			<% if editable %>
+				<%= link_to "Delete", "/locations/#{location.id}", method: 'delete' %>
+				<%= link_to "Edit", edit_location_path(location.id) %>
+			<% end %>
+			<% counter +=1 %>
+		</td></tr>
+		<% end %>
+	<% else %>
+		<h2>No locations added yet!</h2>
+	<% end %>
+		
+	</table>
+	</div>
+
+
+<!--The options-->
+	<% counter = 0 %>
+	<div class="col-md-6">
+		<div id="listoptions">
+		<ul class="nav nav-tabs">
+				<% if editable %><!--user authorization-->
+					<li><%= link_to "Add a location", new_location_url %></li>
+				<% end %>
+			<li><%= link_to "Get Directions", "#", id: "calcRoute" %></li>
+		</ul>
+		</div>	
+		</br></br>
+
+		<div id="directionLeg">
+		<ul class="nav nav-tabs">
+			<li>
+				<%= image_tag '../assets/marker'+alphabet[0]+'.png' %>
+				<%= javascript_tag do %>
+					markers.[0].position
+				<% end %>
+			</li>
+			<li>
+			     to     
+			</li>
+			<li>
+				<%= image_tag '../assets/marker'+alphabet[1]+'.png' %>
+				<%= javascript_tag do %>
+					markers.[1].position
+				<% end %>
+			</li>
+		</ul>
+		</div>	
+		</br></br>
+
+<!--The map-->
+		<div id="mapcanvas"></div><!--this must be a fixed width or the google map will not display!-->
+
+		<%= javascript_tag do %>
+			var adr = null;
+			initialize();
+			initDirections();
+		<% end %>
+
+		<% if !@locations.blank? %>
+			<% @locations.each do |location| %>
+				<%= javascript_tag do %>
+					adr = '<%= j location.address %>';
+					name ='<%= j location.name %>';<!--j tag escapes letters to javascript-->
+					lat = '<%= location.lat.to_f() %>';<!--j tag not needed on numbers-->
+					lng ='<%= location.lng.to_f() %>';
+					codeLatLng(lat,lng,name, <%=counter%>);
+					addStops(lat,lng);
+				<% end %>
+				<% counter += 1 %>
+			<% end %>
+		<% end %>
+
+	</div>
+</div>
+
+
+<script>
+//jquery
+$("#calcRoute").on("click", function(){
+    calcRoute();
+}) ;  //give it a css selector and an anonymous function
+
+</script>
