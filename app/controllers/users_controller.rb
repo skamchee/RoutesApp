@@ -2,9 +2,9 @@ class UsersController < ApplicationController
 
 #show other users lists
   def show
-    u = User.find_by(:name => params[:id]) 
-    if u 
-      @lists = u.lists
+    @user = User.find_by(:name => params[:id]) 
+    if @user 
+      @lists = @user.lists
     end
 
     respond_to do |format|

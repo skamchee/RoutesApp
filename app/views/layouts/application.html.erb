@@ -5,8 +5,7 @@
 
   <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places", :type => "text/javascript"%>
 
- <%= stylesheet_link_tag "bootstrap.css" %>
-
+ <%= stylesheet_link_tag 'http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' %>
  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -21,7 +20,8 @@
   <li><%= link_to "Routes", root_url, class: "navbar-brand" %></li>
 
   <% if !session[:user_id].blank? %>
-  <li><%= link_to "Lists", lists_url%></li>
+  <li><%= link_to "My Lists", lists_url%></li>
+  <li><%= link_to "Favorites", favorites_url%></li>
   <% end %>
     
   </ul>

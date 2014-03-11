@@ -1,5 +1,5 @@
 <!-- shows all the lists a user has -->
-<% if session[:user_id]==User.find_by(:name => params[:id]) %><!--user authorization-->
+<% if session[:user_id]==@user.id %><!--user authorization-->
 	<% editable = true %>
 <% end %>
 
@@ -8,14 +8,24 @@
 <% end %>
 <% if @lists %>
 	<table class="table">
-	
+		<tr><td>
+	  		<h2><%= "#{@user.name}'s lists" %></h2>
+	  	</td></tr>
 		<% @lists.each do |list| %>
 			<tr><td>
 				<h2><%= link_to list.name, "/lists/#{list.id}"%></h2>
+				<p><%=list.description%></p>
 				<% if editable %>
-					<p><%=list.description%></p>
 					<%= link_to "Delete", "/lists/#{list.id}", method: 'delete' %>
 					<%= link_to "Edit", edit_list_path(list.id) %>
+				<% else %>
+					<%if Favorite.where(:list_id => list.id, :user_id => session[:user_id]).blank? %>
+						<%= link_to new_favorite_path(:list_id => list.id) do%> 
+						 	<i class="fa fa-star-o fa-2x"></i>
+						<% end %>
+					<% else %>
+						<i class="fa fa-star fa-2x"></i>
+					<% end %>
 				<% end %>
 			</td></tr>
 		<% end %>

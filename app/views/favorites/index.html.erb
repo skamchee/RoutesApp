@@ -1,0 +1,30 @@
+<!-- shows all the lists a user favorited -->
+<% if session[:user_id]==@user.id %><!--user authorization-->
+	<% editable = true %>
+<% end %>
+
+<% if @lists %>
+	<table class="table">
+		<tr><td>
+	  		<h2><%= "#{@user.name}'s favorites" %></h2>
+	  	</td></tr>
+		<% @lists.each do |list| %>
+			<tr><td>
+				<h2><%= link_to list.name, "/lists/#{list.id}"%></h2>
+				<p><%=list.description%></p>
+
+				<%if Favorite.where(:list_id => list.id, :user_id => session[:user_id]).blank? %>
+					<%= link_to new_favorite_path(:list_id => list.id) do%> 
+					 	<i class="fa fa-star-o fa-2x"></i>
+					<% end %>
+				<% else %>
+					<i class="fa fa-star fa-2x"></i>
+				<% end %>
+
+			</td></tr>
+		<% end %>
+	
+	</table>
+<% else %>
+	<h2>No favorites yet!</h2>
+<% end %>
