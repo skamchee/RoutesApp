@@ -1,12 +1,22 @@
 class UsersController < ApplicationController
 
 #show other users lists
-  # def show
-  #   @user = User.find(params[:id])
-  #   if session[:user_id] != @user.id
-  #     redirect_to root_url, notice: "No way!"
-  #   end
-  # end
+  def show
+    u = User.find_by(:name => params[:id]) 
+    if u 
+      @lists = u.lists
+    end
+
+    respond_to do |format|
+      format.html do
+        render 'show'
+      end
+      format.json do
+        render :json => @lists, :except => [:id, :user_id]
+      end
+    end
+  end
+
 
   def create
     user = User.new
