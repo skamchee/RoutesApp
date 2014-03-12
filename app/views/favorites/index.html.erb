@@ -9,19 +9,22 @@
 	  		<h2><%= "#{@user.name}'s favorites" %></h2>
 	  	</td></tr>
 		<% @lists.each do |list| %>
-			<tr><td>
-				<h2><%= link_to list.name, "/lists/#{list.id}"%></h2>
-				<p><%=list.description%></p>
-
+			<tr>
+				<td>
+				<h2>
 				<%if Favorite.where(:list_id => list.id, :user_id => session[:user_id]).blank? %>
-					<%= link_to new_favorite_path(:list_id => list.id) do%> 
-					 	<i class="fa fa-star-o fa-2x"></i>
-					<% end %>
+						<%= link_to new_favorite_path(:list_id => list.id) do%> 
+					 	<i class="fa fa-star-o"></i>
+						<% end %>
 				<% else %>
-					<i class="fa fa-star fa-2x"></i>
+						<i class="fa fa-star"></i>
 				<% end %>
-
-			</td></tr>
+				
+					<%= link_to list.name, "/lists/#{list.id}"%>
+				</h2>
+					<p><%=list.description%></p>
+				</td>
+			</tr>
 		<% end %>
 	
 	</table>
