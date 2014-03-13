@@ -210,4 +210,6 @@ function mapAddress() {
     var lng = place.geometry.location.lng();//place.geometry.location.e;
     document.getElementById("lat").value = lat;
     document.getElementById("lng").value = lng; 
+    console.log(lat);
+    console.log(lng);
 }
