@@ -16,7 +16,7 @@ end
         render 'show'
       end
       format.json do
-        render :json => @lists, :except => [:id, :user_id]
+        render :json => @lists, :except => [:id, :user_id], :include => :locations
       end
     end
   end

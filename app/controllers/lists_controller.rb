@@ -28,7 +28,7 @@ class ListsController < ApplicationController
 				render 'show'
 			end
 			format.json do
-				render :json => @locations, :except => [:id, :list_id]
+				render :json => @list, :except => [:id, :user_id], :include => :locations
 			end
 		end
 	end
