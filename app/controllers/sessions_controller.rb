@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
     if user
       if user.authenticate(params[:password])
         session[:user_id] = user.id
-        redirect_to root_url #returning user successfully signed in 
+        redirect_to sessions_url #returning user successfully signed in 
       else
         redirect_to new_session_path(:error_msg => "Password does not match")
       end

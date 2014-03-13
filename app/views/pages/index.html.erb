@@ -1,2 +1,29 @@
-here is the top level page
-do something here like show some random lists 
+		<!--jumbotron is only as large as the content-->
+		<div class="jumbotron">
+			<div class="container">
+				<h2>Annotate the world</h2>
+				<p>Plan a route for multiple locations</p>
+				<p>Connect information and pictures to locations</p>
+
+					<%=link_to new_user_path do%>
+					<button type="submit">Start mapping!</button>
+					<% end %>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<p>Share routes with others</p>
+					<a class="btn btn-default">Learn more</a>
+				</div>
+				<div class="col-md-4">
+					<p>Import locations from a file and turn it into a route (coming soon)</p>
+					<a class="btn btn-default">Learn more</a>
+				</div>					
+				<div class="col-md-4">
+					<p>iOS app (coming soon)</p>
+					<a class="btn btn-default">Learn more</a>
+				</div>
+			</div>
+			<hr>

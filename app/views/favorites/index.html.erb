@@ -11,18 +11,15 @@
 		<% @lists.each do |list| %>
 			<tr>
 				<td>
-				<h2>
-				<%if Favorite.where(:list_id => list.id, :user_id => session[:user_id]).blank? %>
-						<%= link_to new_favorite_path(:list_id => list.id) do%> 
-					 	<i class="fa fa-star-o"></i>
+				<h2><%= link_to list.name, "/lists/#{list.id}"%></h2>
+				<p><%=list.description%></p>
+
+				<% if editable %>
+						<%= link_to favorite_path(list.id), method: 'delete' do%> 
+							<i class="fa fa-star-o"></i>Unfavorite
 						<% end %>
-				<% else %>
-						<i class="fa fa-star"></i>
 				<% end %>
-				
-					<%= link_to list.name, "/lists/#{list.id}"%>
-				</h2>
-					<p><%=list.description%></p>
+
 				</td>
 			</tr>
 		<% end %>

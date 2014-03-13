@@ -1,5 +1,13 @@
 class ListsController < ApplicationController
 
+	#controller filter to force use to login in order access any pages that update the models
+	before_action :require_login, :except => [:show]
+	def require_login
+		if !session[:user_id].present?
+			redirect_to root_url
+		end
+	end
+
 	#show the lists the user has ownership of 
 	def index
 		u = User.find_by(:id => session[:user_id]) 

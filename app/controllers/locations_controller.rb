@@ -1,5 +1,13 @@
 class LocationsController < ApplicationController
 
+	#controller filter to force use to login in order access any pages that update the models
+	before_action :require_login, :except => [:show]
+	def require_login
+		if !session[:user_id].present?
+			redirect_to root_url
+		end
+	end
+
 	def create
 		l = Location.new
 		l.list_id = session[:list_id]
