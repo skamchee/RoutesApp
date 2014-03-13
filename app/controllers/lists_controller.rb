@@ -12,7 +12,7 @@ class ListsController < ApplicationController
 	def index
 		u = User.find_by(:id => session[:user_id]) 
 		if u 
-			@lists = u.lists
+			@lists = u.lists.order('id asc')
 		end
 
 		respond_to do |format|
@@ -28,7 +28,7 @@ class ListsController < ApplicationController
 	#show the locations at that list
 	def show
 		@list = List.find_by(id: params[:id])
-		@locations = Location.where(list_id: params[:id])
+		@locations = Location.where(list_id: params[:id]).order('id asc')
 		session[:list_id]= params[:id]
 
 		respond_to do |format|

@@ -5,27 +5,35 @@ var stops = [];
 
 //rendering map
 var geocoder;
-var map;
-var map_canvas;
-var bounds;
+var map = null;
+var map_canvas = null;
+var bounds = null;
 var markers = [];
 var counter=0;
 var alphabet = new Array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
 
 /**needed for displaying the map*/
 function initialize() {
+    markers = [];
+    counter =0;
     geocoder = new google.maps.Geocoder();
-    console.log("first");
+    console.log(markers);
+    console.log(counter);
     var myLatLng = new google.maps.LatLng(0,0);
     map_canvas = document.getElementById("mapcanvas");
-    map_canvas.style.display="none"/* don't display it until markers are added*/
+    //map_canvas.style.display="none"/* don't display it until markers are added*/
     var map_options = {
         center: myLatLng,
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     map = new google.maps.Map(map_canvas, map_options);
-    //console.log(map);
+
+    //to fix a bug where the map only shows up in the upper left hand corner
+    //this bug surfaces when a user displays a map on a page, then tries to display a map on a different page
+    //google.maps.event.addListener(map, 'idle', function() {
+        //google.maps.event.trigger(map, 'resize');
+    //});
 
     // This is needed to set the zoom after fitbounds, because fitbounds runs asynchronously
     google.maps.event.addListener(map, 'zoom_changed', function() {
@@ -40,6 +48,8 @@ function initialize() {
         });
     });
     map.initialZoom = true;
+
+    
 }
 
 
@@ -75,10 +85,13 @@ function addMarker(latlng,info,order){
     
    if(counter==0){
         bounds = new google.maps.LatLngBounds(latlng,latlng); //LatLngBounds takes two LatLng objects as input
+        markers = [];
         counter +=1;
     }else{
         bounds.extend(latlng);
     }
+    //console.log(bounds.getNorthEast());
+     //console.log(bounds.getSouthWest());
     var marker = new google.maps.Marker({
         map: map,
         position: latlng,
