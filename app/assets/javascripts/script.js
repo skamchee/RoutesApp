@@ -206,8 +206,8 @@ function mapAddress() {
 //  document.getElementById(component).disabled = false;
   //  }
 
-    var lat = place.geometry.location.d;
-    var lng = place.geometry.location.e;
+    var lat = place.geometry.location.lat();//place.geometry.location.d;
+    var lng = place.geometry.location.lng();//place.geometry.location.e;
     document.getElementById("lat").value = lat;
     document.getElementById("lng").value = lng; 
 }
