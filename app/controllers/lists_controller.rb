@@ -22,6 +22,7 @@ class ListsController < ApplicationController
 		@list = List.find_by(id: params[:id])
 		@locations = Location.where(list_id: params[:id])
 		session[:list_id]= params[:id]
+		cookies[:list_id]= params[:id]
 
 		respond_to do |format|
 			format.html do

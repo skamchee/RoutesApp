@@ -16,19 +16,21 @@
 				<% if editable %>
 					<%= link_to "Delete", "/lists/#{list.id}", method: 'delete' %>
 					<%= link_to "Edit", edit_list_path(list.id) %>
-				<% else %>
-					<h2>
-					<%if Favorite.where(:list_id => list.id, :user_id => session[:user_id]).blank? %>
-						<%= link_to new_favorite_path(:list_id => list.id) do%> 
-						<i class="fa fa-star-o"></i>
-						<% end %>
-					<% else %>
-						<i class="fa fa-star"></i>
-					<% end %>
 				<% end %>
 
-				<%= link_to list.name, "/lists/#{list.id}"%></h2>
+
+				<h2><%= link_to list.name, "/lists/#{list.id}"%></h2>
 				<p><%=list.description%></p>
+
+				<% if !editable %>
+					<%if Favorite.where(:list_id => list.id, :user_id => session[:user_id]).blank? %>
+						<%= link_to new_favorite_path(:list_id => list.id) do%> 
+						<i class="fa fa-star-o"></i>Favorite
+						<% end %>
+					<% else %>
+						<i class="fa fa-star"></i>Favorited
+					<% end %>
+				<% end %>
 				
 			</td></tr>
 		<% end %>
