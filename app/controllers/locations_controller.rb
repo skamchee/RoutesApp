@@ -8,6 +8,11 @@ class LocationsController < ApplicationController
 		end
 	end
 
+	def show
+		@location = Location.find_by(id: params[:id])
+		@comments = @location.comments.order("id desc")
+	end
+
 	def create
 		l = Location.new
 		l.list_id = session[:list_id]
@@ -28,7 +33,7 @@ class LocationsController < ApplicationController
 
 	def edit
 		if session[:user_id]==List.find_by(id: session[:list_id]).user_id
-			@location = Location.find_by(:id => params[:id])
+			@location = Location.find_by(id: params[:id])
 		else
 			redirect_to root_url
 		end

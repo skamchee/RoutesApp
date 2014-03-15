@@ -9,8 +9,8 @@
 			<tr><td>
 				<h2><%= link_to list.name, "/lists/#{list.id}"%></h2>
 				<p><%=list.description%></p>
-					<%= link_to "Delete", "/lists/#{list.id}", method: 'delete' %>
-					<%= link_to "Edit", edit_list_path(list.id) %>
+					<%= link_to "/lists/#{list.id}", method: 'delete' do %> <i class="fa fa-trash-o"></i>Delete<%end%>
+				<%= link_to edit_list_path(list.id) do%> <i class="fa fa-edit"></i> Edit<%end%>
 			</td></tr>
 		<% end %>
 	

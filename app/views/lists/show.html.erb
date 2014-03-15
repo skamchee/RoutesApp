@@ -20,14 +20,15 @@
 	<% if !@locations.blank? %>
 		<% @locations.each do |location| %>
 		<tr><td>
-			<h3><%= image_tag "/assets/marker#{alphabet[counter]}.png" %>      <%=location.name%></h3>
+			<h3><%= image_tag "/assets/marker#{alphabet[counter]}.png" %>      <%= link_to location_path(location.id) do %><%=location.name%><%end%></h3>
 			<%=location.address%>
 			<p><%=location.description%></p>
 			<h6><%=location.lat%>, <%=location.lng%></h6>
 			<% if editable %>
-				<%= link_to "Delete", "/locations/#{location.id}", method: 'delete' %>
-				<%= link_to "Edit", edit_location_path(location.id) %>
+				<%= link_to "/locations/#{location.id}", method: 'delete' do %> <i class="fa fa-trash-o"></i>Delete<%end%>&nbsp;
+				<%= link_to edit_location_path(location.id) do%> <i class="fa fa-edit"></i> Edit<%end%>&nbsp;
 			<% end %>
+				<%= link_to new_comment_url(:location_id => location.id) do%> <i class="fa fa-comment"></i> Comment<%end%>&nbsp;
 			<% counter +=1 %>
 		</td></tr>
 		<% end %>

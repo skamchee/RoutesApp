@@ -1,0 +1,57 @@
+<!-- shows detail for one location -->
+
+<% alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'] %>
+
+<% if session[:user_id]==List.find_by(id: @location.list_id).user_id %><!--user authorization-->
+	<% editable = true %>
+<% end %>
+
+<div class="row">
+
+	<% counter = 0 %>
+  	<div class="col-md-6">
+
+  	<table class="table">
+  		<tr><td>
+	  		<h2><%= @location.name %></h2>
+	  		<h6><%= @location.address %></h6>
+	  		<h6><%= @location.description %></h6>
+	  		<h6><%=@location.lat%>, <%=@location.lng%></h6>
+	  		<h5><u>Comments</u></h5>
+	  		<% @comments.each do |comment| %>
+	  		<i><%= User.find_by(id: comment.user_id).name %></i> - <%= comment.text %></br> 
+	  		<% end %>
+	  	</td></tr>
+	  </table>
+	  	<table class="table">
+<!--Print out list of locations-->
+		<tr>
+			<% if editable %>
+			<td><%= link_to "/locations/#{@location.id}", method: 'delete' do %> <i class="fa fa-trash-o"></i>Delete<%end%> </td>  
+			<td><%= link_to edit_location_path(@location.id) do%> <i class="fa fa-edit"></i> Edit<%end%> </td>  
+			<% end %>
+			<td><%= link_to new_comment_url(:location_id => @location.id) do%> <i class="fa fa-comment"></i> Comment<%end%></td>
+		</tr>
+	</table>
+	</div>
+
+
+<!--The options-->
+	<% counter = 0 %>
+	<div class="col-md-6">
+<!--The map-->
+		<div id="mapcanvas"></div><!--this must be a fixed width or the google map will not display!-->
+
+		<%= javascript_tag do %>
+			var adr = null;
+			initialize();
+		<% end %>
+
+		<%= javascript_tag do %>
+			name ='<%= j @location.name %>';<!--j tag escapes letters to javascript-->
+			lat = '<%= @location.lat.to_f() %>';<!--j tag not needed on numbers-->
+			lng ='<%= @location.lng.to_f() %>';
+			codeLatLng(lat,lng,name,0);
+		<% end %>
+	</div>
+</div>

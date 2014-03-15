@@ -1,0 +1,28 @@
+<h1>Add a comment</h1>
+
+<% if session[:errors] %>
+  <% session[:errors].each do |e| %>
+    <h6>Errors:<%= e %></h6>
+  <% end %>
+    <% session[:errors] = nil %><!--clear for future use -->
+<% end %>
+<br>
+
+<!--Send a POST request to the comments resource-->
+<%= form_tag "/comments" do %>
+
+  <%= label_tag :text %>
+  <%= text_area_tag "text", nil, rows: 4, cols:100 %>
+
+<%= hidden_field_tag 'location_id', params[:location_id] %>
+<!-- need to present some options -->
+<!-- then let the post request come from only those options -->
+  <br>
+  <br>
+  <%= submit_tag "Submit" %>
+<% end %>
+
+<!--this code must be after the input element with id="autocomplete", or it will not be set with the google autocomplete code-->
+<%= javascript_tag do %>
+  initac();
+<% end %>

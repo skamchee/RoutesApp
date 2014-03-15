@@ -8,20 +8,21 @@
 <% end %>
 <% if @lists %>
 	<table class="table">
-		<tr><td>
 	  		<h2><%= "#{@user.name}'s lists" %></h2>
-	  	</td></tr>
+	  </table>
+	<table class="table">
 		<% @lists.each do |list| %>
-			<tr><td>
+	
+				<tr>
+				<td>
+					<h2><%= link_to list.name, "/lists/#{list.id}"%></h2>
+					<p><%=list.description%></p>
+				
 				<% if editable %>
-					<%= link_to "Delete", "/lists/#{list.id}", method: 'delete' %>
-					<%= link_to "Edit", edit_list_path(list.id) %>
+				<%= link_to "/lists/#{list.id}", method: 'delete' do %> <i class="fa fa-trash-o"></i>Delete<%end%>
+				<%= link_to edit_list_path(list.id) do%> <i class="fa fa-edit"></i> Edit<%end%>
 				<% end %>
-
-
-				<h2><%= link_to list.name, "/lists/#{list.id}"%></h2>
-				<p><%=list.description%></p>
-
+		
 				<% if !editable %>
 					<%if Favorite.where(:list_id => list.id, :user_id => session[:user_id]).blank? %>
 						<%= link_to new_favorite_path(:list_id => list.id) do%> 
@@ -31,7 +32,7 @@
 						<i class="fa fa-star"></i>Favorited
 					<% end %>
 				<% end %>
-				
+							
 			</td></tr>
 		<% end %>
 	
