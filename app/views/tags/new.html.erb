@@ -1,4 +1,4 @@
-<h1>Add a comment</h1>
+<h1>Add a tag</h1>
 
 <% if session[:errors] %>
   <% session[:errors].each do |e| %>
@@ -8,13 +8,13 @@
 <% end %>
 <br>
 
-<!--Send a POST request to the comments resource-->
-<%= form_tag "/comments" do %>
+<!--Send a POST request to the tags resource-->
+<%= form_tag "/tags" do %>
 
   <%= label_tag :text %>
-  <%= text_area_tag "text", nil, rows: 4, cols:100 %>
+  <%= text_area_tag "text", nil, cols:30 %>
 
-<%= hidden_field_tag 'location_id', params[:location_id] %>
+<%= hidden_field_tag 'list_id', params[:list_id] %>
   <br>
   <br>
   <%= submit_tag "Submit" %>

@@ -1,3 +1,12 @@
 1. bundle install
 2. rails server
 3. Note: To keep in line with the production environment on heroku, the development environment uses PostgreSQL. Therefore, make sure to have PostgreSQL installed and running locally, or the app won't run.
+
+
+Resources/Models:
+Users
+Lists
+Locations
+Favorites
+Comments
+Tags

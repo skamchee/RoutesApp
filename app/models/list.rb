@@ -7,4 +7,5 @@ class List < ActiveRecord::Base
 	has_many :locations
 	belongs_to :user
 	has_many :favorites
+	has_many :tags
 end

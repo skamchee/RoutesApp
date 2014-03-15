@@ -19,8 +19,9 @@
 					<p><%=list.description%></p>
 				
 				<% if editable %>
-				<%= link_to "/lists/#{list.id}", method: 'delete' do %> <i class="fa fa-trash-o"></i>Delete<%end%>
-				<%= link_to edit_list_path(list.id) do%> <i class="fa fa-edit"></i> Edit<%end%>
+				<%= link_to "/lists/#{list.id}", method: 'delete' do %> <i class="fa fa-trash-o"></i>Delete<%end%>&nbsp;
+				<%= link_to edit_list_path(list.id) do%> <i class="fa fa-edit"></i> Edit<%end%>&nbsp;
+				<%= link_to new_tag_url(:list_id => list.id) do%> <i class="fa fa-tag"></i> Tag<%end%>&nbsp;
 				<% end %>
 		
 				<% if !editable %>
@@ -35,6 +36,8 @@
 							
 			</td></tr>
 		<% end %>
+
+		
 	
 	</table>
 <% else %>

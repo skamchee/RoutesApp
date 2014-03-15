@@ -17,27 +17,35 @@
 	  		<h6><%= @list.description %></h6>
 	  	</td></tr>
 <!--Print out list of locations-->
-	<% if !@locations.blank? %>
-		<% @locations.each do |location| %>
-		<tr><td>
-			<h3><%= image_tag "/assets/marker#{alphabet[counter]}.png" %>      <%= link_to location_path(location.id) do %><%=location.name%><%end%></h3>
-			<%=location.address%>
-			<p><%=location.description%></p>
-			<h6><%=location.lat%>, <%=location.lng%></h6>
-			<% if editable %>
-				<%= link_to "/locations/#{location.id}", method: 'delete' do %> <i class="fa fa-trash-o"></i>Delete<%end%>&nbsp;
-				<%= link_to edit_location_path(location.id) do%> <i class="fa fa-edit"></i> Edit<%end%>&nbsp;
+		<% if !@locations.blank? %>
+			<% @locations.each do |location| %>
+				<tr><td>
+					<h3><%= image_tag "/assets/marker#{alphabet[counter]}.png" %>      <%= link_to location_path(location.id) do %><%=location.name%><%end%></h3>
+					<%=location.address%>
+					<p><%=location.description%></p>
+					<h6><%=location.lat%>, <%=location.lng%></h6>
+					<% if editable %>
+						<%= link_to "/locations/#{location.id}", method: 'delete' do %> <i class="fa fa-trash-o"></i>Delete<%end%>&nbsp;
+						<%= link_to edit_location_path(location.id) do%> <i class="fa fa-edit"></i> Edit<%end%>&nbsp;
+					<% end %>
+					<%= link_to new_comment_url(:location_id => location.id) do%> <i class="fa fa-comment"></i> Comment<%end%>&nbsp;
+					<% counter +=1 %>
+				</td></tr>
 			<% end %>
-				<%= link_to new_comment_url(:location_id => location.id) do%> <i class="fa fa-comment"></i> Comment<%end%>&nbsp;
-			<% counter +=1 %>
-		</td></tr>
+		<% else %>
+			<tr><td>
+				<h3>No locations added yet!</h3>
+			</td></tr>
 		<% end %>
-	<% else %>
-		<tr><td>
-		<h3>No locations added yet!</h3>
-	</td></tr>
-	<% end %>
-		
+
+		<tr><td>Tags 
+			<% @list.tags.each do |tag| %>
+				<button type="button" class="btn btn-primary btn-xs">
+					<%= tag.text %>
+					<% if editable %><%=link_to tag_path(tag.id, list_id: @list.id), method: 'delete' do%><i class="fa fa-times"></i><%end%><%end%>
+				</button>
+			<% end %>
+		</td></tr>
 	</table>
 	</div>
 
