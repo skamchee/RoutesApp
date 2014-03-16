@@ -1,3 +1,4 @@
+#comments may be added to a location
 class CommentsController < ApplicationController
 	def create
 		c = Comment.new

@@ -2,7 +2,8 @@
 
 <% alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'] %>
 
-<% if session[:user_id]==List.find_by(id: @location.list_id).user_id %><!--user authorization-->
+<!--user authorization-->
+<% if session[:user_id]==List.find_by(id: @location.list_id).user_id %>
 	<% editable = true %>
 <% end %>
 
@@ -11,6 +12,7 @@
 	<% counter = 0 %>
   	<div class="col-md-6">
 
+<!--Print out list of locations and any comments on those locations -->
   	<table class="table">
   		<tr><td>
 	  		<h2><%= @location.name %></h2>
@@ -24,7 +26,7 @@
 	  	</td></tr>
 	  </table>
 	  	<table class="table">
-<!--Print out list of locations-->
+
 		<tr>
 			<% if editable %>
 			<td><%= link_to "/locations/#{@location.id}", method: 'delete' do %> <i class="fa fa-trash-o"></i>Delete<%end%> </td>  
@@ -35,11 +37,9 @@
 	</table>
 	</div>
 
-
-<!--The options-->
 	<% counter = 0 %>
 	<div class="col-md-6">
-<!--The map-->
+<!--The google map and associated JS to get it to display location information-->
 		<div id="mapcanvas"></div><!--this must be a fixed width or the google map will not display!-->
 
 		<%= javascript_tag do %>

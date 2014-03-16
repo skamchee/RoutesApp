@@ -1,13 +1,5 @@
 <h1>Add a tag</h1>
 
-<% if session[:errors] %>
-  <% session[:errors].each do |e| %>
-    <h6>Errors:<%= e %></h6>
-  <% end %>
-    <% session[:errors] = nil %><!--clear for future use -->
-<% end %>
-<br>
-
 <!--Send a POST request to the tags resource-->
 <%= form_tag "/tags" do %>
 

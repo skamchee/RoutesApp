@@ -1,4 +1,4 @@
-<!-- shows detail for one list -->
+<!-- shows detail for one list, i.e. the locations that are encompassed in one list -->
 
 <% alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'] %>
 
@@ -50,19 +50,20 @@
 	</div>
 
 
-<!--The options-->
+<!--The options to update the list-->
 	<% counter = 0 %>
 	<div class="col-md-6">
 		<div id="listoptions">
 		<ul class="nav nav-tabs">
 				<% if editable %><!--user authorization-->
-					<li><%= link_to "Add a location", new_location_url %></li>
+					<li><%= link_to new_location_url do%><i class="fa fa-plus"></i>Add a location <%end%></li>
+					<li><%= link_to new_tag_url(:list_id => @list.id) do%> <i class="fa fa-tag"></i> Tag<%end%></li>
 				<% end %>
-			<li><%= link_to "Get Directions", "#", id: "calcRoute" %></li>
 		</ul>
 		</div>	
 		</br></br>
 
+<!--not used
 		<div id="directionLeg">
 		<ul class="nav nav-tabs">
 			<li>
@@ -82,9 +83,9 @@
 			</li>
 		</ul>
 		</div>	
-		</br></br>
+		</br></br>-->
 
-<!--The map-->
+<!--The google map and associated JS to get it to display location information-->
 		<div id="mapcanvas"></div><!--this must be a fixed width or the google map will not display!-->
 
 		<%= javascript_tag do %>
