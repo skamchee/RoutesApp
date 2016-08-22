@@ -1,3 +1,6 @@
+Please visit 
+http://secret-river-9154.herokuapp.com/ for a live working demo
+
 1. bundle install
 2. rails server
 3. Note: To keep in line with the production environment on heroku, the development environment uses PostgreSQL. Therefore, make sure to have PostgreSQL installed and running locally, or the app won't run. The Gemfile was updated accordingly.
